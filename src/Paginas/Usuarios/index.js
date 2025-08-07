@@ -1,23 +1,31 @@
 import { useEffect, useState } from "react";
-import { listarUsuarios } from "../../servicos/usuarios";
+import { deletarUsuario, listarUsuarios } from "../../servicos/usuarios";
 import { useNavigate } from "react-router-dom";
+import Cabecalho from "../../componentes/Cabecalho";
+import Rodape from "../../componentes/Rodape";
 
 function Usuarios() {
     const navigate = useNavigate()
     const [usuarios, setUsuarios] = useState([]);
 
     useEffect(() => {
-            listarUsuarios(setUsuarios);
-    }, []);       
+        listarUsuarios(setUsuarios);
+    }, []);
 
     const redirecionarParaNovoUsuario = () => {
-            navigate("/usuarios/novo");
+        navigate("/usuarios/novo");
+    }
+
+    const excluirUsuario = async (id) => {
+        await deletarUsuario(id)
+
+        window.location.reload()
     }
 
     return (
         <>
+            <Cabecalho />
 
-         
             <section className="container mt-3" id="usuarios">
                 <div className="d-flex justify-content-between">
                     <h1>Usuários Cadastrados</h1>
@@ -50,12 +58,12 @@ function Usuarios() {
                                 <td>{usuario.status}</td>
                                 <td>
                                     <div className="btn-group">
-                                        <button className="btn btn-warning" onClick={() => { }}>
+                                        <button className="btn btn-warning" onClick={() => navigate(`/usuarios/${usuarios.id}`)}>
                                             Editar
                                         </button>
-                                        <button className="btn btn-danger" onClick={() => { }}>
+                                        <button className="btn btn-danger" onClick={() => excluirUsuario(usuario.id)}>
                                             Excluir
-                                        </button>"
+                                        </button>
                                     </div>
                                 </td>
                             </tr>
@@ -64,7 +72,7 @@ function Usuarios() {
                     </tbody>
                 </table>
             </section>
-                        
+            <Rodape />
         </>
     );
 
