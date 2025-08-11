@@ -4,6 +4,7 @@ import { buscarUsuarioPeloId, listarUsuarios } from "../../../servicos/usuarios"
 import { atualizarTarefa, cadastrarTarefa } from "../../../servicos/tarefas";
 import Cabecalho from "../../../componentes/Cabecalho";
 import Rodape from "../../../componentes/Rodape";
+import { listarProjetos } from "../../../servicos/projetos";
 
 function FormularioTarefas() {
     const { id } = useParams();
@@ -22,6 +23,7 @@ function FormularioTarefas() {
             );
         }
         listarUsuarios(setUsuarios);
+        listarProjetos(setProjetos);
     }, []);
 
     const [titulo, setTitulo] = useState("");
@@ -182,7 +184,7 @@ function FormularioTarefas() {
                             ) : (
                                 projetos.map((projeto) => (
                                     <option key={projeto.id} value={projeto.id}>
-                                        {projeto.titulo}
+                                        {projeto.nome}
                                     </option>
                                 ))
                             )}

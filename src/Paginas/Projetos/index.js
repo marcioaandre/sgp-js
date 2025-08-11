@@ -48,8 +48,8 @@ function Projetos() {
                 <td>{projeto.id}</td>
                 <td>{projeto.nome}</td>
                 <td>{projeto.descricao}</td>
-                <td>{projeto.responsavel}</td>
-                <td>{projeto.opcoes}</td>
+                <td>{projeto.responsavel.nome}</td>
+           
                 <td>
                   <div className="btn-group">
                     <button className="btn btn-primary" onClick={() => {}}>
